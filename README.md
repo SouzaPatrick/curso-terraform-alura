@@ -26,3 +26,18 @@ terraform apply
 
 Modulo 2:
 - Criar security groups e realizar a conexao via ssh
+
+Modulo 3:
+- Adicionar variaveis
+```
+...
+vpc_security_group_ids = [ "${aws_security_group.acesso-ssh.id}" ]
+```
+- Adiconar dependencias para na criacao
+```
+ depends_on = [
+    aws_s3_bucket.dev4
+  ]
+```
+
+Modulo 4

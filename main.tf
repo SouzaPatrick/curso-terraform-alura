@@ -24,7 +24,30 @@ resource "aws_instance" "dev" {
   tags = {
     "Name" = "dev${count.index}"
   }
-  vpc_security_group_ids = [ "sg-08035d2627d0de809" ]
+  vpc_security_group_ids = [ "${aws_security_group.acesso-ssh.id}" ]
+}
+
+resource "aws_instance" "dev4" {
+  ami = "ami-0747bdcabd34c712a"
+  instance_type = "t2.micro"
+  key_name = "${aws_key_pair.terraform_aws.key_name}"
+  tags = {
+    "Name" = "dev4"
+  }
+  vpc_security_group_ids = [ "${aws_security_group.acesso-ssh.id}" ]
+  depends_on = [
+    aws_s3_bucket.dev4
+  ]
+}
+
+resource "aws_instance" "dev5" {
+  ami = "ami-0747bdcabd34c712a"
+  instance_type = "t2.micro"
+  key_name = "${aws_key_pair.terraform_aws.key_name}"
+  tags = {
+    "Name" = "dev5"
+  }
+  vpc_security_group_ids = [ "${aws_security_group.acesso-ssh.id}" ]
 }
 
 resource "aws_security_group" "acesso-ssh" {
@@ -40,5 +63,14 @@ resource "aws_security_group" "acesso-ssh" {
 
   tags = {
     Name = "ssh"
+  }
+}
+
+resource "aws_s3_bucket" "dev4" {
+  bucket = "call4fit-dev4"
+  acl    = "private"
+
+  tags = {
+    Name = "call4fit-dev4"
   }
 }
