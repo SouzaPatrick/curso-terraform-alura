@@ -2,6 +2,10 @@
 Apendendo a usar o terraform
 
 Modulo 1:
+- Instalar terraform
+```
+choco install terraform
+```
 - Criar um usuario admin (com acesso total) para que possamos controlar a aws
 - Gerar um par de chaves ssh local para que nao fiquemos presos a um provedor, e possa usar ela tbm em outras regioes da aws
 ```
@@ -80,3 +84,26 @@ Modulo 6:
 - Criar arquivos de outputs
 
 Modulo 7:
+- Criar arquivo terraform.rc na pasta ~\AppData\Roaming 
+```
+credentials "app.terraform.io" {
+    token = "<token>"
+}
+```
+- Criamos o arquivo remote-state
+```
+terraform {
+    backend "remote" {
+      hostname = "app.terraform.io"
+      organization = "kralsdigital"
+
+      workspaces {
+          name = "aws-curso-alura"
+      }
+    }
+}
+```
+- Adicionar as variaveis de ambiente da aws no terraform cloud, nao tem no curso, vi em tutorial por fora por conta do erro
+```
+Error: error configuring Terraform AWS Provider: no valid credential sources for Terraform AWS Provider found.
+```

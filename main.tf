@@ -18,7 +18,7 @@ provider "aws" {
 
 resource "aws_key_pair" "terraform_aws" {
   key_name = "terraform-aws"
-  public_key = "${file("C:\\Users\\Felip\\.ssh\\terraform-aws.pub")}"
+  public_key = var.key_pub
 }
 
 resource "aws_instance" "dev" {
@@ -80,12 +80,32 @@ resource "aws_instance" "dev7" {
   vpc_security_group_ids = [ "${aws_security_group.acesso-ssh-us-east-2.id}" ]
 }
 
+resource "aws_instance" "homologacao" {
+  provider = aws.us-east-2
+  ami = var.amis["us-east-2"]
+  instance_type = var.instances["test"]
+  key_name = "${aws_key_pair.terraform_aws.key_name}"
+  tags = {
+    "Name" = "homologacao"
+  }
+  vpc_security_group_ids = [ "${aws_security_group.acesso-ssh-us-east-2.id}" ]
+}
+
 resource "aws_s3_bucket" "dev4" {
   bucket = "call4fit-dev4"
   acl    = "private"
 
   tags = {
     Name = "call4fit-dev4"
+  }
+}
+
+resource "aws_s3_bucket" "homologacao" {
+  bucket = "call4fit-homologacao"
+  acl    = "private"
+
+  tags = {
+    Name = "call4fit-homologacao"
   }
 }
 
