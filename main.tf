@@ -1,5 +1,13 @@
+terraform {
+    required_providers {
+        aws = {
+            source  = "hashicorp/aws"
+            version = "~> 3.0"
+        }
+    }
+}
+
 provider "aws" {
-  version = "~> 3.0"
   region = "us-east-1"
 }
 
@@ -15,5 +23,22 @@ resource "aws_instance" "dev" {
   key_name = "${aws_key_pair.terraform_aws.key_name}"
   tags = {
     "Name" = "dev${count.index}"
+  }
+  vpc_security_group_ids = [ "sg-08035d2627d0de809" ]
+}
+
+resource "aws_security_group" "acesso-ssh" {
+  name        = "acesso-ssh"
+  description = "acesso-ssh"
+
+  ingress {
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    cidr_blocks      = ["181.191.205.18/32"]
+  }
+
+  tags = {
+    Name = "ssh"
   }
 }
