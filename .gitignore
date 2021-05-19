@@ -3,3 +3,5 @@
 terraform-aws.pub
 terraform-aws
 terraform.tfstate
+.vscode
+terraform.tfstate.backup
