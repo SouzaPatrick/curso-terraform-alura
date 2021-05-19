@@ -41,3 +41,5 @@ vpc_security_group_ids = [ "${aws_security_group.acesso-ssh.id}" ]
 ```
 
 Modulo 4
+- Separar em varios arquivos para facilitar a compreencao
+- 
