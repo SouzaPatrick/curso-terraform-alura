@@ -5,3 +5,4 @@ terraform-aws
 terraform.tfstate
 .vscode
 terraform.tfstate.backup
+.terraform.tfstate.lock.info
