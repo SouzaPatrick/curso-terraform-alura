@@ -72,3 +72,11 @@ variable "cdirs_acesso_remoto" {
 ```
 
 Modulo 6:
+- Apagar recursos
+  Pode ser feito excluido os recursos e depois dar um plan e um apply normamlmente, mais recomendado, ou com o coamndo abaxio:
+  ```
+  terraform destroy --target <nome_recurso>
+  ```
+- Criar arquivos de outputs
+
+Modulo 7:
