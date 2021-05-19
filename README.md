@@ -11,3 +11,18 @@ ssh-keygen.exe -f terraform-aws -t rsa
 ```
 mv ~\.ssh\
 ```
+- Iniciar as configuracoes do terraform
+```
+terraform init
+```
+- Verificar se tudo esta de acordo, validar
+```
+terraform plan
+```
+- Aplicar configuracoes
+```
+terraform apply
+```
+
+Modulo 2:
+- Criar security groups e realizar a conexao via ssh
